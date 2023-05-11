@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StrativProj.Models
+namespace StrativAvProj.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TemperatureCollection
+    public class TemperatureCollection
     {
         public long Id { get; set; }
         public string TemDate { get; set; }

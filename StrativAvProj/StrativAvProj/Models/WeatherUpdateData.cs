@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace StrativProj.Models
+namespace StrativAvProj.Models
 {
     public class WeatherUpdateData
     {
