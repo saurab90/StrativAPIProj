@@ -1,4 +1,3 @@
-D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\obj\Debug\StrativAvProj.csproj.CoreCompileInputs.cache
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\bin\StrativAvProj.dll.config
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\bin\StrativAvProj.dll
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\bin\StrativAvProj.pdb
@@ -61,6 +60,7 @@ D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\bin\System.Web.WebPage
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\bin\Antlr3.Runtime.pdb
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\obj\Debug\StrativAvProj.csproj.AssemblyReference.cache
+D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\obj\Debug\StrativAvProj.csproj.CoreCompileInputs.cache
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\obj\Debug\StrativAvProj.csproj.CopyComplete
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\obj\Debug\StrativAvProj.dll
 D:\LatestDrive\StrativAPIProj\StrativAvProj\StrativAvProj\obj\Debug\StrativAvProj.pdb

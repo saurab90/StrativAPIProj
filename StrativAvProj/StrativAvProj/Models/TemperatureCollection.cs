@@ -12,7 +12,7 @@ namespace StrativAvProj.Models
     using System;
     using System.Collections.Generic;
     
-    public class TemperatureCollection
+    public partial class TemperatureCollection
     {
         public long Id { get; set; }
         public string TemDate { get; set; }
