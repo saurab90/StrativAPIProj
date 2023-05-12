@@ -14,9 +14,9 @@ namespace StrativAvProj.Controllers
     public class WeatherUpdateController : ApiController
     {
         // GET: api/WeatherUpdate
-        public IEnumerable<TemperatureCollection> GetCoolestPlace()
+        public IHttpActionResult GetCoolestPlace()
         {
-            var urlDistrict = "https://raw.githubusercontent.com/strativ-dev/technical-screening-test/main/bd-districts.json";
+            string urlDistrict = "https://raw.githubusercontent.com/strativ-dev/technical-screening-test/main/bd-districts.json";
 
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
@@ -31,43 +31,43 @@ namespace StrativAvProj.Controllers
 
             HttpWebRequest webRequest = WebRequest.CreateHttp(getUrl);
 
-            using (var webResponse = webRequest.GetResponse())
-            using (var reader = new StreamReader(webResponse.GetResponseStream()))
+            using (WebResponse webResponse = webRequest.GetResponse())
+            using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
             {
                 getdata = reader.ReadToEnd();
             }
 
-            var getjsondata = jss.Deserialize<DistData>(getdata);  // get JsonData string
-            var fdata = getjsondata.districts.ToList();
+            DistData getjsondata = jss.Deserialize<DistData>(getdata);  // get JsonData string
+            List<DistData> fdata = getjsondata.districts.ToList();
 
             List<TemperatureCollection> nwTempList = new List<TemperatureCollection>();
 
             // loop all district latitude and longitude and pass as parameter in wether API
-            foreach (var item in fdata)
+            foreach (DistData item in fdata)
             {
-                var lati = item.lat;
-                var Longi = item.Long;
-                var districtName = item.name;
+                string lati = item.lat;
+                string Longi = item.Long;
+                string districtName = item.name;
 
 
-                var urlWeatherLat = "https://api.open-meteo.com/v1/forecast?latitude=" + lati;
-                var urlWeatherLong = "&longitude=" + Longi;
-                var urlTemp = urlWeatherLat + urlWeatherLong + "&hourly=temperature_2m";
+                string urlWeatherLat = "https://api.open-meteo.com/v1/forecast?latitude=" + lati;
+                string urlWeatherLong = "&longitude=" + Longi;
+                string urlTemp = urlWeatherLat + urlWeatherLong + "&hourly=temperature_2m";
 
                 string getweatherUrl = urlTemp;
                 string getweatherdata;
 
                 HttpWebRequest webRequestWeather = WebRequest.CreateHttp(getweatherUrl);
 
-                using (var webResponse = webRequestWeather.GetResponse())
-                using (var reader = new StreamReader(webResponse.GetResponseStream()))
+                using (WebResponse webResponse = webRequestWeather.GetResponse())
+                using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
                 {
                     getweatherdata = reader.ReadToEnd();
                 }
 
                 WeatherUpdateData wupData = new WeatherUpdateData(getweatherdata); // json data string
-                var tim = wupData.time;
-                var tem = wupData.temperature_2m;
+                Array tim = wupData.time;
+                Array tem = wupData.temperature_2m;
 
                 ArrayList lstTim = new ArrayList(tim);
                 ArrayList lstTem = new ArrayList(tem);
@@ -77,12 +77,12 @@ namespace StrativAvProj.Controllers
 
                 for (int m = 0; m < lstTim.Count; m++)  // join array Time/Date with Temperature using index
                 {
-                    var dtime = lstTim[m].ToString();
-                    var spdtime = dtime.Split('T');
+                    string dtime = lstTim[m].ToString();
+                    string[] spdtime = dtime.Split('T');
 
-                    var dtemp = lstTem[m].ToString();
+                    string dtemp = lstTem[m].ToString();
 
-                    var time14 = (string)spdtime[1];
+                    string time14 = (string)spdtime[1];
 
                     if (time14 == "14:00")
                     {
@@ -100,23 +100,16 @@ namespace StrativAvProj.Controllers
                 }
 
                 // take lowest tem from 7 tem of 1 district each
-                var lowTemData = lstTempp.OrderBy(x => x.Temperature).FirstOrDefault();
-
-                TemperatureCollection coolestDistrictTemperature2Pm = new TemperatureCollection();
-
-                coolestDistrictTemperature2Pm.Latitude = lowTemData.Latitude;
-                coolestDistrictTemperature2Pm.Longitude = lowTemData.Longitude;
-                coolestDistrictTemperature2Pm.TemDate = lowTemData.TemDate;
-                coolestDistrictTemperature2Pm.Temperature = lowTemData.Temperature;
-                coolestDistrictTemperature2Pm.Time = lowTemData.Time;
-                coolestDistrictTemperature2Pm.DistrictName = lowTemData.DistrictName;
-
-                nwTempList.Add(coolestDistrictTemperature2Pm);
+                TemperatureCollection lowTemData = lstTempp.OrderBy(x => x.Temperature).FirstOrDefault();
+                nwTempList.Add(lowTemData);
             }
 
-            var coolest10Place = nwTempList.OrderBy(x => x.Temperature).Take(10);
+            IEnumerable<TemperatureCollection> coolest10Place = nwTempList.OrderBy(x => x.Temperature).Take(10);
+            //List<TemperatureCollection> coolest10Place = nwTempList.OrderBy(x => x.Temperature).Take(10).ToList();
 
-            return coolest10Place;  // return list of JsonData
+            return Ok(coolest10Place);  // return list of JsonData
+            //return (IEnumerable<TemperatureCollection>)Ok(new { success = "Request Successfully Submited", objCoolest10PlaceData = coolest10Place });
+
         }
 
         // GET: api/WeatherUpdate/5
@@ -128,7 +121,7 @@ namespace StrativAvProj.Controllers
         [Route("api/WeatherUpdate/AllDistrictTemData")]   // route the name as AllDistrictTemData
         public IEnumerable<TemperatureCollection> AllDistrictNext7DayTemp()
         {
-            var urlDistrict = "https://raw.githubusercontent.com/strativ-dev/technical-screening-test/main/bd-districts.json";
+            string urlDistrict = "https://raw.githubusercontent.com/strativ-dev/technical-screening-test/main/bd-districts.json";
 
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
@@ -143,43 +136,43 @@ namespace StrativAvProj.Controllers
 
             HttpWebRequest webRequest = WebRequest.CreateHttp(getUrl);
 
-            using (var webResponse = webRequest.GetResponse())
-            using (var reader = new StreamReader(webResponse.GetResponseStream()))
+            using (WebResponse webResponse = webRequest.GetResponse())
+            using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
             {
                 getdata = reader.ReadToEnd();
             }
 
-            var getjsondata = jss.Deserialize<DistData>(getdata);  // get dynamic JsonData
-            var fdata = getjsondata.districts.ToList();
+            DistData getjsondata = jss.Deserialize<DistData>(getdata);  // get dynamic JsonData
+            List<DistData> fdata = getjsondata.districts.ToList();
 
             List<TemperatureCollection> lstTempp = new List<TemperatureCollection>();
 
-            foreach (var item in fdata)
+            foreach (DistData item in fdata)
             {
-                var lati = item.lat;
-                var Longi = item.Long;
-                var districtName = item.name;
+                string lati = item.lat;
+                string Longi = item.Long;
+                string districtName = item.name;
 
 
-                var urlWeatherLat = "https://api.open-meteo.com/v1/forecast?latitude=" + lati;
-                var urlWeatherLong = "&longitude=" + Longi;
-                var urlTemp = urlWeatherLat + urlWeatherLong + "&hourly=temperature_2m";
+                string urlWeatherLat = "https://api.open-meteo.com/v1/forecast?latitude=" + lati;
+                string urlWeatherLong = "&longitude=" + Longi;
+                string urlTemp = urlWeatherLat + urlWeatherLong + "&hourly=temperature_2m";
 
                 string getweatherUrl = urlTemp;
                 string getweatherdata;
 
                 HttpWebRequest webRequestWeather = WebRequest.CreateHttp(getweatherUrl);
 
-                using (var webResponse = webRequestWeather.GetResponse())
-                using (var reader = new StreamReader(webResponse.GetResponseStream()))
+                using (WebResponse webResponse = webRequestWeather.GetResponse())
+                using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
                 {
                     getweatherdata = reader.ReadToEnd();
                 }
 
                 WeatherUpdateData wupData = new WeatherUpdateData(getweatherdata);
 
-                var tim = wupData.time;
-                var tem = wupData.temperature_2m;
+                Array tim = wupData.time;
+                Array tem = wupData.temperature_2m;
 
                 ArrayList lstTim = new ArrayList(tim);
                 ArrayList lstTem = new ArrayList(tem);
@@ -188,12 +181,12 @@ namespace StrativAvProj.Controllers
 
                 for (int m = 0; m < lstTim.Count; m++)
                 {
-                    var dtime = lstTim[m].ToString();
-                    var spdtime = dtime.Split('T');
+                    string dtime = lstTim[m].ToString();
+                    string[] spdtime = dtime.Split('T');
 
-                    var dtemp = lstTem[m].ToString();
+                    string dtemp = lstTem[m].ToString();
 
-                    var time14 = (string)spdtime[1];
+                    string time14 = (string)spdtime[1];
 
 
                     if (time14 == "14:00")
@@ -213,30 +206,46 @@ namespace StrativAvProj.Controllers
                 }
             }
             return lstTempp;
+            //return (IQueryable<TemperatureCollection>)lstTempp;
         }
 
 
         // POST: api/WeatherUpdate
         public IHttpActionResult PostTempUpdate(TemperaturePost temperaturePost)
         {
-            var tempDataAll = AllDistrictNext7DayTemp().ToList();
+           // List<TemperatureCollection> tempDataAll = AllDistrictNext7DayTemp().ToList();
+            IEnumerable<TemperatureCollection> tempDataAll = AllDistrictNext7DayTemp();
 
-            var fltDataTemCurrLocation = tempDataAll
+            IEnumerable<TemperatureCollection> fltDataTemCurrLocation = tempDataAll
                                             .Where(x => x.DistrictName == temperaturePost.CurrentLocation
-                                                   && x.TemDate == temperaturePost.SearchDate).OrderBy(y => y.Temperature).ToList();
+                                                   && x.TemDate == temperaturePost.SearchDate);
 
-            var fltDataTemDestLocation = tempDataAll
+            IEnumerable<TemperatureCollection> fltDataTemDestLocation = tempDataAll
                                           .Where(x => x.DistrictName == temperaturePost.Destination
                                                    && x.TemDate == temperaturePost.SearchDate);
 
+            //List<TemperatureCollection> fltDataTemDestLocation = tempDataAll
+            //                              .Where(x => x.DistrictName == temperaturePost.Destination
+            //                                       && x.TemDate == temperaturePost.SearchDate).ToList();
 
+            List<TemperatureCollection> nwList = new List<TemperatureCollection>();
+            nwList.Add(fltDataTemCurrLocation.FirstOrDefault());
+            nwList.Add(fltDataTemDestLocation.FirstOrDefault());
+
+            var compareData = new
+            {
+                //objLocationTemperatureData = fltDataTemCurrLocation,
+                //objDestinationTemperatureData = fltDataTemDestLocation
+                allData = nwList
+            };
 
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid data.");
             }
 
-            return Ok(new { success = "Request Successfully Submited", objLocationTemperatureData = fltDataTemCurrLocation, objDestinationTemperatureData = fltDataTemDestLocation });
+            //return Ok(new { success = "Request Successfully Submited", objLocationTemperatureData = fltDataTemCurrLocation, objDestinationTemperatureData = fltDataTemDestLocation });
+            return Ok(compareData);
         }
 
 

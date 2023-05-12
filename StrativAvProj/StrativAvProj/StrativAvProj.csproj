@@ -169,7 +169,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompareTemperature.cs" />
     <Compile Include="Models\DistData.cs" />
+    <Compile Include="Models\TemperatureCollectionUser.cs" />
     <Compile Include="Models\TemperatureCollection.cs" />
     <Compile Include="Models\TemperaturePost.cs" />
     <Compile Include="Models\WeatherUpdateData.cs" />
@@ -225,10 +227,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Temperature\Index.cshtml" />
+    <Content Include="Views\Temperature\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Temperature\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
