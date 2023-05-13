@@ -33,15 +33,15 @@ API Project + User Project:
 
 
 Instructions:
-01: Clone/Download project from git repository.
-02: Connect Internet connection PC/Laptop.
-03: (Build+Run) the project
-04: Poject will show a default page with layout. In page header navbar pannel you will get 2 options:
-		4.1) Coolest 10 Districts.
-		4.2) Create Request
+1. Clone/Download project from git repository.
+2. Connect Internet connection PC/Laptop.
+3. (Build+Run) the project
+4. Poject will show a default page with layout. In page header navbar pannel you will get 2 options:
+		1. Coolest 10 Districts.
+		2. Create Request
 
-4.1: Coolest 10 District: It's will get data from our created GET API and show in a list.
-4.2: Create Request: It's will POST data to our created POST API and return response.
+1. Coolest 10 District: It's will get data from our created GET API and show in a list.
+2. Create Request: It's will POST data to our created POST API and return response.
 
 
 
