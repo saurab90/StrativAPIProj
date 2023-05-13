@@ -5,7 +5,7 @@ Web API development and testing.
 Repository Link GitHub:
 https://github.com/saurab90/StrativAPIProj
 
-===============================================
+
 1. GET API Link:
 http://localhost:62742/api/weatherupdate
 
@@ -21,17 +21,17 @@ Body => raw =>(JSON Type data)
     "SearchDate":"2023-05-13"
 }
 
-================================================
+
 Test Environment: Postman
 *NB-Local Environment API Test needed Desktop Postman Agent software.
-================================================
+
 
 API Project + User Project:
 1. API Controller: "WeatherUpdateController"
 2. User Interface Controller: "TemperatureController"
 3. Database: No Database need for this project
 
-=================================================
+
 Instructions:
 step 01: Clone/Download project from git repository.
 step 02: Connect Internet connection PC/Laptop.
