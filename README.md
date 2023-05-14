@@ -20,6 +20,8 @@ Body => raw =>(JSON Type data)
     "Destination":"Faridpur",
     "SearchDate":"2023-05-13"
 }
+Current location & destination name must starts with capital letter according to the same as below api link.
+https://raw.githubusercontent.com/strativ-dev/technical-screening-test/main/bd-districts.json
 
 
 Test Environment: Postman
